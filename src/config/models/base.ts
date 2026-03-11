@@ -9,5 +9,6 @@ export abstract class BaseModelProvider {
 export interface ModelProviderConfig {
   apiKey?: string;
   apiUrl?: string;
+  model?: string;
   enabled?: boolean;
 }

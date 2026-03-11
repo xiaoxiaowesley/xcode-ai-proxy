@@ -20,14 +20,15 @@ export class KimiProvider extends BaseModelProvider {
   getModels(): Record<string, ApiModelConfig> {
     if (!this.isAvailable()) return {};
 
+    const model = this.config.model || 'moonshot-v1-8k';
     return {
-      'kimi-k2-0905-preview': {
+      [model]: {
         type: 'api',
         apiUrl: this.config.apiUrl || 'https://api.moonshot.cn/v1',
         apiKey: this.config.apiKey!,
         provider: 'kimi',
         name: 'Kimi K2',
-        model: 'moonshot-v1-8k'
+        model
       }
     };
   }

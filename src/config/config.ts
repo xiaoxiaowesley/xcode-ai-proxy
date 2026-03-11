@@ -72,28 +72,32 @@ export class ConfigManager {
     // 智谱AI GLM-4.5
     const zhipuProvider = new ZhipuProvider({
       apiKey: this.env.ZHIPU_API_KEY,
-      apiUrl: this.env.ZHIPU_API_URL
+      apiUrl: this.env.ZHIPU_API_URL,
+      model: this.env.ZHIPU_API_MODEL
     });
     Object.assign(this.modelConfigs, zhipuProvider.getModels());
 
     // Kimi
     const kimiProvider = new KimiProvider({
       apiKey: this.env.KIMI_API_KEY,
-      apiUrl: this.env.KIMI_API_URL
+      apiUrl: this.env.KIMI_API_URL,
+      model: this.env.KIMI_API_MODEL
     });
     Object.assign(this.modelConfigs, kimiProvider.getModels());
 
     // Gemini
     const geminiProvider = new GeminiProvider({
       apiKey: this.env.GEMINI_API_KEY,
-      apiUrl: this.env.GEMINI_API_URL
+      apiUrl: this.env.GEMINI_API_URL,
+      model: this.env.GEMINI_API_MODEL
     });
     Object.assign(this.modelConfigs, geminiProvider.getModels());
 
     // Qwen
     const qwenProvider = new QwenProvider({
       apiKey: this.env.QWEN_API_KEY,
-      apiUrl: this.env.QWEN_API_URL
+      apiUrl: this.env.QWEN_API_URL,
+      model: this.env.QWEN_API_MODEL
     });
     Object.assign(this.modelConfigs, qwenProvider.getModels());
   }

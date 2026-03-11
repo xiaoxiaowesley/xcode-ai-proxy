@@ -33,12 +33,16 @@ export interface AppConfig {
 export interface EnvConfig {
   ZHIPU_API_KEY?: string;
   ZHIPU_API_URL?: string;
+  ZHIPU_API_MODEL?: string;
   KIMI_API_KEY?: string;
   KIMI_API_URL?: string;
+  KIMI_API_MODEL?: string;
   GEMINI_API_KEY?: string;
   GEMINI_API_URL?: string;
+  GEMINI_API_MODEL?: string;
   QWEN_API_KEY?: string;
   QWEN_API_URL?: string;
+  QWEN_API_MODEL?: string;
   CUSTOM_SYSTEM_PROMPT?: string;
   PORT?: string;
   HOST?: string;

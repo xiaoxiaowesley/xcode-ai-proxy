@@ -20,14 +20,15 @@ export class ZhipuProvider extends BaseModelProvider {
   getModels(): Record<string, ApiModelConfig> {
     if (!this.isAvailable()) return {};
 
+    const model = this.config.model || 'glm-4-0520';
     return {
-      'glm-4.5': {
+      [model]: {
         type: 'api',
         apiUrl: this.config.apiUrl || 'https://open.bigmodel.cn/api/paas/v4',
         apiKey: this.config.apiKey!,
         provider: 'zhipu',
         name: 'GLM-4.5',
-        model: 'glm-4-0520'
+        model
       }
     };
   }

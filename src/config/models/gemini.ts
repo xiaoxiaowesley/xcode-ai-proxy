@@ -20,14 +20,15 @@ export class GeminiProvider extends BaseModelProvider {
   getModels(): Record<string, ApiModelConfig> {
     if (!this.isAvailable()) return {};
 
+    const model = this.config.model || 'gemini-2.5-pro';
     return {
-      'gemini-2.5-pro': {
+      [model]: {
         type: 'api',
         apiUrl: this.config.apiUrl || 'https://generativelanguage.googleapis.com/v1beta/openai',
         apiKey: this.config.apiKey!,
         provider: 'google',
         name: 'Gemini 2.5 Pro',
-        model: 'gemini-2.5-pro'
+        model
       }
     };
   }
