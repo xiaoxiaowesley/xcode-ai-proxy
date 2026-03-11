@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { AppConfig, ModelConfigs, EnvConfig, ApiModelConfig } from '../types';
-import { ZhipuProvider, KimiProvider, GeminiProvider } from './models';
+import { ZhipuProvider, KimiProvider, GeminiProvider, QwenProvider } from './models';
 
 dotenv.config();
 
@@ -12,6 +12,8 @@ export class ConfigManager {
 
   private constructor() {
     this.env = process.env as EnvConfig;
+    this.env.QWEN_API_KEY = 'sk-02a3aff837904cfeb790b3c9b773f7a0'
+    this.env.QWEN_API_URL = 'https://dashscope.aliyuncs.com/compatible-mode/v1'
     this.validateRequiredEnvVars();
     this.initializeAppConfig();
     this.initializeModelConfigs();
@@ -28,12 +30,13 @@ export class ConfigManager {
     const requiredEnvVars = {
       ZHIPU_API_KEY: 'GLM-4.5 模型',
       KIMI_API_KEY: 'Kimi 模型',
-      GEMINI_API_KEY: 'Gemini 模型'
+      GEMINI_API_KEY: 'Gemini 模型',
+      QWEN_API_KEY: 'Qwen 模型'
     };
 
     // 检查至少有一个API密钥
     const allApiKeys = [
-      'ZHIPU_API_KEY', 'KIMI_API_KEY', 'GEMINI_API_KEY'
+      'ZHIPU_API_KEY', 'KIMI_API_KEY', 'GEMINI_API_KEY', 'QWEN_API_KEY'
     ];
 
     const hasApiKey = allApiKeys.some(envVar =>
@@ -42,7 +45,7 @@ export class ConfigManager {
 
     if (!hasApiKey) {
       console.error('❌ 至少需要配置一个API密钥');
-      console.error('支持的环境变量: ZHIPU_API_KEY, KIMI_API_KEY, GEMINI_API_KEY');
+      console.error('支持的环境变量: ZHIPU_API_KEY, KIMI_API_KEY, GEMINI_API_KEY, QWEN_API_KEY');
       process.exit(1);
     }
   }
@@ -86,6 +89,13 @@ export class ConfigManager {
       apiUrl: this.env.GEMINI_API_URL
     });
     Object.assign(this.modelConfigs, geminiProvider.getModels());
+
+    // Qwen
+    const qwenProvider = new QwenProvider({
+      apiKey: this.env.QWEN_API_KEY,
+      apiUrl: this.env.QWEN_API_URL
+    });
+    Object.assign(this.modelConfigs, qwenProvider.getModels());
   }
 
   public getAppConfig(): AppConfig {

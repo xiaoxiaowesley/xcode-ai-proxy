@@ -88,11 +88,16 @@ export class ApiHandler extends BaseHandler {
       };
 
       // 构建请求数据 - 所有provider都使用OpenAI格式
-      const requestData = {
+      const requestData: any = {
         ...requestBody,
         model: config.model || requestBody.model,
         messages: processMessages(requestBody.messages)
       };
+
+      // Qwen API 不接受空的 tools 数组
+      if (Array.isArray(requestData.tools) && requestData.tools.length === 0) {
+        delete requestData.tools;
+      }
 
       console.log(`📡 向 ${config.provider} 发送请求:`, {
         url: `${config.apiUrl}/chat/completions`,

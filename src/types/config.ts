@@ -9,7 +9,7 @@ export interface ApiModelConfig extends BaseModelConfig {
   type: 'api';
   apiUrl: string;
   apiKey: string;
-  provider: 'zhipu' | 'kimi' | 'google';
+  provider: 'zhipu' | 'kimi' | 'google' | 'qwen';
   model?: string;
   maxTokens?: number;
   temperature?: number;
@@ -37,6 +37,8 @@ export interface EnvConfig {
   KIMI_API_URL?: string;
   GEMINI_API_KEY?: string;
   GEMINI_API_URL?: string;
+  QWEN_API_KEY?: string;
+  QWEN_API_URL?: string;
   CUSTOM_SYSTEM_PROMPT?: string;
   PORT?: string;
   HOST?: string;
